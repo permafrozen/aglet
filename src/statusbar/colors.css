@@ -1,0 +1,1 @@
+@define-color transp_bg alpha(@window_bg_color, 0.5);

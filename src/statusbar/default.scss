@@ -1,0 +1,18 @@
+$fg-color: #{"@window_fg_color"};
+$bg-color: #{"@window_bg_color"};
+$bg-trans: #{"@transp_bg"};
+
+window.Statusbar {
+    background: $bg-trans;
+    color: $fg-color;
+    font-weight: bold;
+
+    > centerbox {
+        background: transparent;
+        border-radius: 10px;
+    }
+
+    button {
+        background: transparent;
+    }
+}

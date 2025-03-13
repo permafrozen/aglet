@@ -1,2 +1,42 @@
-# aglet
-Gtk shell for desktop usage made with astal and bundled by ags.
+# Aglet
+
+## Description
+Gtk shell for desktop usage made with astal and bundled with ags.
+
+## Table of Contents
+1. [Description](#description)
+2. [Installation](#installation)
+3. [Dependencies](#dependencies)
+
+## installation
+Use a flake to install it by using this repository as an input and add `inputs.aglet.packages.x86_64-linux.default` to `environment.systemPackages`. Don't forget to pass `inputs` to `specialArgs` or `extraSpecialArgs` *(for home-manager)* to use it anywhere in the configuration.
+
+### `inputs` example (`flake.nix`)
+```nix
+  inputs = {
+      # ...
+    aglet = {
+      url = "github:Permafrozen/aglet";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+      # ...
+  }
+```
+
+### Usage example *(anywhere in the config)*
+```nix
+{ inputs, ... }:
+
+{
+  # astal config from remote flake
+  environment.systemPackages = [ inputs.aglet.packages.x86_64-linux.default ];
+
+  # dependencies (look #dependencies for more info)
+  services.upower.enable = true;
+  # ...
+}
+```
+
+## dependencies
+
+1. For the battery module to work you need a `upower` **daemon** running. Otherwise it will always say `0%`

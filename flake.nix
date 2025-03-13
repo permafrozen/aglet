@@ -24,10 +24,7 @@
           gtk4 = true;
 
           # additional libraries and executables to add to gjs' runtime
-          extraPackages = [
-            # ags.packages.${system}.battery
-            # pkgs.fzf
-          ];
+          extraPackages = [ ags.packages.${system}.battery ];
         };
       };
 
@@ -38,6 +35,7 @@
             (ags.packages.${system}.default.override {
               extraPackages = [
                 # cherry pick packages
+                ags.packages.${system}.battery
               ];
             })
           ];

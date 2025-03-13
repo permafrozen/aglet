@@ -15,4 +15,9 @@ window.Statusbar {
     button {
         background: transparent;
     }
+
+    calender * {
+        background: $bg-trans;
+        border: none;
+    }
 }

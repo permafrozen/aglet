@@ -2,6 +2,7 @@ import { App, Astal, Gtk, Gdk } from "astal/gtk4";
 import { bind, Variable } from "astal";
 import GLib from "gi://GLib?version=2.0";
 import Battery from "gi://AstalBattery";
+import Hyprland from "gi://AstalHyprland?version=0.1";
 
 export default function Statusbar(gdkmonitor: Gdk.Monitor) {
     const { TOP, LEFT, RIGHT, BOTTOM } = Astal.WindowAnchor;
@@ -9,14 +10,14 @@ export default function Statusbar(gdkmonitor: Gdk.Monitor) {
     return (
         <window
             visible
-            cssClasses={["Statusbar"]}
+            cssClasses={["statusbar"]}
             gdkmonitor={gdkmonitor}
             exclusivity={Astal.Exclusivity.EXCLUSIVE}
             anchor={TOP | LEFT | RIGHT}
             application={App}
         >
             <centerbox cssName="centerbox">
-                <box />
+                <Workspaces />
                 <Time />
                 <Power />
             </centerbox>
@@ -43,12 +44,36 @@ function Time() {
 function Power() {
     const battery = Battery.get_default();
     return (
-        <menubutton hexpand halign={Gtk.Align.END}>
+        <menubutton cssName="time" hexpand halign={Gtk.Align.CENTER}>
             <label
                 label={bind(battery, "percentage").as(
                     (p) => `${Math.floor(p * 100)} %`,
                 )}
             />
         </menubutton>
+    );
+}
+
+function Workspaces() {
+    const hyprland = Hyprland.get_default();
+    return (
+        <box hexpand halign={Gtk.Align.CENTER} cssClasses={["workspaces"]}>
+            {bind(hyprland, "workspaces").as((workspaces) =>
+                workspaces
+                    .sort((a, b) => a.id - b.id)
+                    .map((workspace) => (
+                        <button
+                        // cssName={
+                        //     bind(hyprland, "focused_workspace").as(
+                        //         (focused) =>
+                        //             workspace === focused ? "focused" : "",
+                        //     ) as unknown as string
+                        // }
+                        >
+                            {workspace.id}
+                        </button>
+                    )),
+            )}
+        </box>
     );
 }

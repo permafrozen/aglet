@@ -24,7 +24,8 @@
           gtk4 = true;
 
           # additional libraries and executables to add to gjs' runtime
-          extraPackages = [ ags.packages.${system}.battery ];
+          extraPackages =
+            [ ags.packages.${system}.battery ags.packages.${system}.hyprland ];
         };
       };
 
@@ -36,6 +37,7 @@
               extraPackages = [
                 # cherry pick packages
                 ags.packages.${system}.battery
+                ags.packages.${system}.hyprland
               ];
             })
           ];

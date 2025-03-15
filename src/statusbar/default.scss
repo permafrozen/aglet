@@ -2,12 +2,12 @@ $fg-color: #{"@window_fg_color"};
 $bg-color: #{"@window_bg_color"};
 $bg-trans: #{"@transp_bg"};
 
-window.Statusbar {
+window.statusbar {
     background: $bg-trans;
     color: $fg-color;
     font-weight: bold;
 
-    > centerbox {
+    centerbox {
         background: transparent;
         border-radius: 10px;
     }
@@ -16,8 +16,14 @@ window.Statusbar {
         background: transparent;
     }
 
-    calender * {
+    calender {
         background: $bg-trans;
         border: none;
+    }
+
+    time * {
+        all: unset;
+        background: transparent;
+        color: $fg-color;
     }
 }

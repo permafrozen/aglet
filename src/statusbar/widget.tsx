@@ -44,7 +44,7 @@ function Time() {
 function Power() {
     const battery = Battery.get_default();
     return (
-        <menubutton cssName="time" hexpand halign={Gtk.Align.CENTER}>
+        <menubutton cssName="time" hexpand halign={Gtk.Align.END}>
             <label
                 label={bind(battery, "percentage").as(
                     (p) => `${Math.floor(p * 100)} %`,
@@ -57,7 +57,7 @@ function Power() {
 function Workspaces() {
     const hyprland = Hyprland.get_default();
     return (
-        <box hexpand halign={Gtk.Align.CENTER} cssClasses={["workspaces"]}>
+        <box hexpand halign={Gtk.Align.START} cssClasses={["workspaces"]}>
             {bind(hyprland, "workspaces").as((workspaces) =>
                 workspaces
                     .sort((a, b) => a.id - b.id)

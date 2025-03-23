@@ -1,11 +1,22 @@
 $fg-color: #{"@window_fg_color"};
 $bg-color: #{"@window_bg_color"};
 $bg-trans: #{"@transp_bg"};
+$fg-trans: #{"@transp_fg"};
 
 window.statusbar {
     background: $bg-trans;
     color: $fg-color;
     font-weight: bold;
+
+    workspaces {
+        color: $fg-color;
+        .focused {
+            border: solid 5px $fg-trans;
+        }
+        .unfocused {
+            border: solid 5px transparent;
+        }
+    }
 
     centerbox {
         background: transparent;

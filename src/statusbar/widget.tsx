@@ -57,18 +57,18 @@ function Power() {
 function Workspaces() {
     const hyprland = Hyprland.get_default();
     return (
-        <box hexpand halign={Gtk.Align.START} cssClasses={["workspaces"]}>
+        <box hexpand halign={Gtk.Align.START} cssName={"workspaces"}>
             {bind(hyprland, "workspaces").as((workspaces) =>
                 workspaces
                     .sort((a, b) => a.id - b.id)
                     .map((workspace) => (
                         <button
-                        // cssName={
-                        //     bind(hyprland, "focused_workspace").as(
-                        //         (focused) =>
-                        //             workspace === focused ? "focused" : "",
-                        //     ) as unknown as string
-                        // }
+                            cssClasses={bind(hyprland, "focused_workspace").as(
+                                (focused) =>
+                                    focused == workspace
+                                        ? ["focused"]
+                                        : ["unfocused"], // @cafetestrest on dc helped troubleshoot
+                            )}
                         >
                             {workspace.id}
                         </button>

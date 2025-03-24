@@ -11,10 +11,12 @@ window.statusbar {
     workspaces {
         color: $fg-color;
         .focused {
-            border: solid 15px $fg-trans;
+            border: solid 5px $fg-trans;
+            border-radius: 15px;
         }
         .unfocused {
-            border: solid 15px transparent;
+            border: solid 5px transparent;
+            border-radius: 15px;
         }
     }
 

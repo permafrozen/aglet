@@ -10,13 +10,26 @@ window.statusbar {
 
     workspaces {
         color: $fg-color;
-        .focused {
-            border: solid 5px $fg-trans;
-            border-radius: 15px;
+
+        button {
+            border-bottom: 5px solid transparent;
+            border-radius: 0px;
+            background: transparent;
+            transition: border-color 500ms ease-out;
+
+            &.focused {
+                border-color: $fg-trans;
+                animation: border-fade-in 300ms ease-out;
+            }
         }
-        .unfocused {
-            border: solid 5px transparent;
-            border-radius: 15px;
+    }
+
+    @keyframes border-fade-in {
+        0% {
+            border-color: transparent;
+        }
+        100% {
+            border-color: $fg-trans;
         }
     }
 

@@ -1,8 +1,9 @@
 import { App, Astal, Gtk, Gdk } from "astal/gtk4";
-import { bind, Variable } from "astal";
+import { bind, Binding, timeout, Variable } from "astal";
 import GLib from "gi://GLib?version=2.0";
 import Battery from "gi://AstalBattery";
 import Hyprland from "gi://AstalHyprland?version=0.1";
+import { Box, Button, Revealer } from "astal/gtk4/widget";
 
 export default function Statusbar(gdkmonitor: Gdk.Monitor) {
     const { TOP, LEFT, RIGHT, BOTTOM } = Astal.WindowAnchor;
@@ -55,25 +56,61 @@ function Power() {
 }
 
 function Workspaces() {
-    const hyprland = Hyprland.get_default();
+    const hypr = Hyprland.get_default();
+    const show = Variable(false);
+
+    // Reveal after 400 ms
+    timeout(400, () => show.set(true));
+
     return (
-        <box hexpand halign={Gtk.Align.START} cssName={"workspaces"}>
-            {bind(hyprland, "workspaces").as((workspaces) =>
-                workspaces
-                    .sort((a, b) => a.id - b.id)
-                    .map((workspace) => (
-                        <button
-                            cssClasses={bind(hyprland, "focused_workspace").as(
-                                (focused) =>
-                                    focused == workspace
-                                        ? ["focused"]
-                                        : ["unfocused"], // @cafetestrest on dc helped troubleshoot
-                            )}
-                        >
-                            {workspace.id}
-                        </button>
-                    )),
-            )}
-        </box>
+        <Revealer
+            transitionType={Gtk.RevealerTransitionType.SLIDE_RIGHT}
+            reveal_child={bind(show).as(Boolean)}
+        >
+            <Box cssName="workspaces">
+                {bind(hypr, "workspaces").as((wss) => {
+                    const buttons = [];
+                    wss.sort((a, b) => a.id - b.id);
+                    for (const key in wss) {
+                        const show = false;
+
+                        buttons.push(
+                            <Revealer
+                                transition_duration={300}
+                                transition_type={
+                                    Gtk.RevealerTransitionType.SLIDE_RIGHT
+                                }
+                                reveal_child={bind(
+                                    hypr,
+                                    "focused_workspace",
+                                ).as((fws) => {
+                                    if (
+                                        fws == wss[key] ||
+                                        wss[key].last_client != null
+                                    ) {
+                                        return true;
+                                    }
+                                    return false;
+                                })}
+                            >
+                                <Button
+                                    cssClasses={bind(
+                                        hypr,
+                                        "focused_workspace",
+                                    ).as((fws) =>
+                                        fws == wss[key]
+                                            ? ["focused"]
+                                            : ["unfocused"],
+                                    )}
+                                >
+                                    {wss[key].id}
+                                </Button>
+                            </Revealer>,
+                        );
+                    }
+                    return buttons;
+                })}
+            </Box>
+        </Revealer>
     );
 }

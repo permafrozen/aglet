@@ -61,5 +61,8 @@ cd src/
 ags types -d . -p
 ```
 
+> [!IMPORTANT]
+> You also need `inotify-tools` if you want to use the `dev.sh` script.
+
 4. Documentation
     - https://aylur.github.io/astal/guide/libraries/references

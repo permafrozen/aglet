@@ -33,25 +33,22 @@ function Time() {
     );
 
     return (
-        <menubutton hexpand halign={Gtk.Align.CENTER}>
+        <Box>
             <label label={time()} />
-            <popover cssName="calender">
-                <Gtk.Calendar />
-            </popover>
-        </menubutton>
+        </Box>
     );
 }
 
 function Power() {
     const battery = Battery.get_default();
     return (
-        <menubutton cssName="time" hexpand halign={Gtk.Align.END}>
+        <Box cssName="battery">
             <label
                 label={bind(battery, "percentage").as(
                     (p) => `${Math.floor(p * 100)} %`,
                 )}
             />
-        </menubutton>
+        </Box>
     );
 }
 

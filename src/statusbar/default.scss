@@ -2,6 +2,7 @@ $fg-color: #{"@window_fg_color"};
 $bg-color: #{"@window_bg_color"};
 $bg-trans: #{"@transp_bg"};
 $fg-trans: #{"@transp_fg"};
+$fg-trans-inactive: #{"@transp_fg_inactive"};
 
 window.statusbar {
     background: $bg-trans;
@@ -21,6 +22,10 @@ window.statusbar {
                 border-color: $fg-trans;
                 animation: border-fade-in 300ms ease-out;
             }
+
+            &.unfocused {
+                border-color: $fg-trans-inactive;
+            }
         }
     }
 
@@ -33,23 +38,7 @@ window.statusbar {
         }
     }
 
-    centerbox {
-        background: transparent;
-        border-radius: 10px;
-    }
-
     button {
         background: transparent;
-    }
-
-    calender {
-        background: $bg-trans;
-        border: none;
-    }
-
-    time * {
-        all: unset;
-        background: transparent;
-        color: $fg-color;
     }
 }

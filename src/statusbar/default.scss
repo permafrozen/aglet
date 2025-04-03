@@ -9,22 +9,24 @@ window.statusbar {
     color: $fg-color;
     font-weight: bold;
 
-    workspaces {
-        color: $fg-color;
+    hypr {
+        workspaces {
+            color: $fg-color;
+            button {
+                border-bottom: 5px solid transparent;
+                border-radius: 0px;
+                transition: border-color 500ms ease-out;
+                background: transparent;
 
-        button {
-            border-bottom: 5px solid transparent;
-            border-radius: 0px;
-            background: transparent;
-            transition: border-color 500ms ease-out;
+                padding: 0 0.5em 0 0.5em;
+                &.focused {
+                    border-color: $fg-trans;
+                    animation: border-fade-in 300ms ease-out;
+                }
 
-            &.focused {
-                border-color: $fg-trans;
-                animation: border-fade-in 300ms ease-out;
-            }
-
-            &.unfocused {
-                border-color: $fg-trans-inactive;
+                &.unfocused {
+                    border-color: $fg-trans-inactive;
+                }
             }
         }
     }
@@ -38,7 +40,10 @@ window.statusbar {
         }
     }
 
-    button {
-        background: transparent;
+    info {
+        .module {
+            margin: 0 0.5em 0 0.5em;
+            background: transparent;
+        }
     }
 }

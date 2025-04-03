@@ -37,7 +37,7 @@ export default function Statusbar(gdkmonitor: Gdk.Monitor) {
 function Time() {
     const time = Variable("").poll(
         1000,
-        () => GLib.DateTime.new_now_local().format("%H:%M")!,
+        () => GLib.DateTime.new_now_local().format("%H:%M:%S")!,
     );
 
     return (

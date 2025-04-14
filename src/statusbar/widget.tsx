@@ -3,7 +3,7 @@ import { Box } from "astal/gtk4/widget";
 
 // Modules
 import StatusModule from "./modules/status";
-import SystemModule from "./modules/system";
+import SystemModule from "./modules/connection";
 import PowerModule from "./modules/power";
 import WorkspaceModule from "./modules/workspaces";
 

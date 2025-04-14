@@ -12,9 +12,8 @@ export default function Power() {
                         <Box>
                             <Box cssClasses={["module"]}>
                                 {bind(battery, "percentage").as((p) => {
-                                    return `${Math.floor(p * 100)}`;
+                                    return `${Math.floor(p * 100)}%`;
                                 })}
-                                <Image icon_name={bind(battery, "icon_name")} />
                             </Box>
                             <Box cssClasses={["module"]}>
                                 {bind(battery, "energy_rate").as(
